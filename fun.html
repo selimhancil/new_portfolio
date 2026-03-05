@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eğlence Alanı | Selim Hancıl</title>
+    <meta name="description" content="Mini oyunlar, zeka soruları ve interaktif deneyimler. Sıkılmak yok!">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+</head>
+
+<body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+    </div>
+    <div class="dot-grid"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">S</div><span>Selim Hancıl</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Ana Sayfa</a><a href="community.html">Topluluk</a><a
+                    href="projects.html">Projeler</a><a href="blog.html">Blog</a><a href="about.html">Hakkımda</a><a
+                    href="contact.html">İletişim</a><a href="fun.html" class="active">🎮 Eğlence</a>
+            </div>
+            <div class="nav-actions">
+                <a href="https://github.com/selimhancil" target="_blank" class="nav-social-link" title="GitHub"><svg
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg></a>
+                <a href="https://x.com/selimhancil" target="_blank" class="nav-social-link" title="X / Twitter"><svg
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg></a>
+                <a href="https://instagram.com/selimhancil" target="_blank" class="nav-social-link nav-instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+            </div>
+            <a href="auth.html" class="btn btn-primary" id="navAuthBtn" style="padding:8px 20px;font-size:0.82rem;">Giriş Yap</a>
+      <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-badge">~/fun</div>
+            <h1>🎮 Eğlence Alanı</h1>
+            <p>Mini oyunlar, zeka testleri ve interaktif deneyimler. Sıkılmak yok, eğlence burada!</p>
+        </div>
+    </section>
+
+    <!-- FUN STATS BAR -->
+    <section class="section" style="padding-top:0;">
+        <div class="container">
+            <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-bottom:40px;">
+                <div class="fun-stat-pill">🎮 7 Oyun</div>
+                <div class="fun-stat-pill">🧠 Zeka Testleri</div>
+                <div class="fun-stat-pill">⚡ Refleks Testleri</div>
+                <div class="fun-stat-pill">∞ Eğlence</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ARAÇ YARIŞI (Laptop içinde) ===== -->
+    <section class="section" id="car-racing-section">
+        <div class="container">
+            <div class="laptop-wrap reveal">
+                <div class="laptop-mockup">
+                    <div class="laptop-screen">
+                        <div class="laptop-bezel">
+                            <div class="laptop-camera"></div>
+                            <div class="laptop-screen-inner">
+                                <div class="car-racing-game">
+                                    <canvas id="carRacingCanvas" width="520" height="320"></canvas>
+                                    <div class="game-overlay" id="carRacingOverlay">
+                                        <div class="game-overlay-text">🏎️ Araba Yarışı</div>
+                                        <button class="btn btn-primary game-start-btn" onclick="startCarRacing()">Başla</button>
+                                        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">← → veya A D ile yönlendir</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="laptop-base">
+                        <div class="laptop-keyboard"></div>
+                        <div class="laptop-trackpad"></div>
+                    </div>
+                </div>
+                <div class="laptop-game-header">
+                    <h2 class="game-card-title">🏎️ Araba Yarışı</h2>
+                    <p class="game-card-subtitle">3 can • Hız artar • En yüksek skoru kır! ← → veya A D</p>
+                    <div style="display:flex;gap:24px;align-items:center;">
+                        <div class="game-score" id="carRacingScore">0 puan</div>
+                        <span style="font-size:0.85rem;color:var(--text-muted);">En yüksek: <strong id="carRacingHighScore">0</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GAME 1: SNAKE ===== -->
+    <section class="section" id="snake-section">
+        <div class="container">
+            <div class="game-card reveal">
+                <div class="game-card-header">
+                    <div class="game-card-icon">🐍</div>
+                    <div>
+                        <h2 class="game-card-title">Yılan Oyunu</h2>
+                        <p class="game-card-subtitle">Klasik yılan oyunu — yön tuşlarıyla oyna!</p>
+                    </div>
+                    <div class="game-score" id="snakeScore">Skor: 0</div>
+                </div>
+                <div class="game-area">
+                    <canvas id="snakeCanvas" width="400" height="400"></canvas>
+                    <div class="game-overlay" id="snakeOverlay">
+                        <div class="game-overlay-text">🐍 Yılan Oyunu</div>
+                        <button class="btn btn-primary game-start-btn" onclick="startSnake()">Başla</button>
+                        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;">Yön tuşları veya WASD ile
+                            oyna</div>
+                    </div>
+                </div>
+                <div class="game-mobile-controls" id="snakeMobileControls" style="display:none;">
+                    <button class="mobile-ctrl-btn" onclick="snakeDir('up')">▲</button>
+                    <div style="display:flex;gap:8px;">
+                        <button class="mobile-ctrl-btn" onclick="snakeDir('left')">◀</button>
+                        <button class="mobile-ctrl-btn" onclick="snakeDir('down')">▼</button>
+                        <button class="mobile-ctrl-btn" onclick="snakeDir('right')">▶</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GAME 2: MEMORY ===== -->
+    <section class="section" id="memory-section">
+        <div class="container">
+            <div class="game-card reveal">
+                <div class="game-card-header">
+                    <div class="game-card-icon">🧠</div>
+                    <div>
+                        <h2 class="game-card-title">Hafıza Oyunu</h2>
+                        <p class="game-card-subtitle">Eşleşen kartları bul!</p>
+                    </div>
+                    <div class="game-score" id="memoryScore">Hamle: 0</div>
+                </div>
+                <div class="game-area">
+                    <div class="memory-grid" id="memoryGrid"></div>
+                </div>
+                <div style="text-align:center;margin-top:16px;">
+                    <button class="btn btn-secondary" onclick="initMemory()">Yeniden Başla</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GAME 3: TYPING SPEED (Link to dedicated page) ===== -->
+    <section class="section" id="typing-section">
+        <div class="container">
+            <div class="game-card reveal" style="cursor:pointer;" onclick="window.location.href='typing-test.html'">
+                <div class="game-card-header" style="border-bottom:none;margin-bottom:0;padding-bottom:0;">
+                    <div class="game-card-icon">⌨️</div>
+                    <div>
+                        <h2 class="game-card-title">Ne Kadar Hızlı Bir Yazılımcısın?</h2>
+                        <p class="game-card-subtitle">3 zorluk seviyesi • Kod parçacıkları • Detaylı analiz • Skor
+                            tablosu</p>
+                    </div>
+                    <a href="typing-test.html" class="btn btn-primary"
+                        style="margin-left:auto;white-space:nowrap;">Teste Başla →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GAME 4: REFLEX TEST ===== -->
+    <section class="section" id="reflex-section">
+        <div class="container">
+            <div class="game-card reveal">
+                <div class="game-card-header">
+                    <div class="game-card-icon">⚡</div>
+                    <div>
+                        <h2 class="game-card-title">Refleks Testi</h2>
+                        <p class="game-card-subtitle">Tepki sürenizi ölçün!</p>
+                    </div>
+                </div>
+                <div class="game-area reflex-area" id="reflexArea" onclick="reflexClick()">
+                    <div class="reflex-text" id="reflexText">Başlamak için tıkla</div>
+                    <div class="reflex-result" id="reflexResult"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GAME 5: MATH QUIZ ===== -->
+    <section class="section" id="math-section">
+        <div class="container">
+            <div class="game-card reveal">
+                <div class="game-card-header">
+                    <div class="game-card-icon">🔢</div>
+                    <div>
+                        <h2 class="game-card-title">Matematik Yarışması</h2>
+                        <p class="game-card-subtitle">30 saniyede kaç soru çözebilirsin?</p>
+                    </div>
+                    <div class="game-score" id="mathScore">Skor: 0</div>
+                </div>
+                <div class="game-area" style="padding:32px;text-align:center;">
+                    <div class="math-question" id="mathQuestion">Başlamak için butona bas!</div>
+                    <input type="number" class="math-input" id="mathInput" placeholder="Cevabını yaz..."
+                        autocomplete="off" disabled>
+                    <div class="typing-stats" style="margin-top:16px;">
+                        <div class="typing-stat"><span id="mathTime">30</span><small>Saniye</small></div>
+                        <div class="typing-stat"><span id="mathCorrect">0</span><small>Doğru</small></div>
+                        <div class="typing-stat"><span id="mathWrong">0</span><small>Yanlış</small></div>
+                    </div>
+                    <div style="text-align:center;margin-top:16px;">
+                        <button class="btn btn-primary" id="mathStartBtn" onclick="startMath()">Başla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GAME 6: ROCK PAPER SCISSORS ===== -->
+    <section class="section" id="rps-section">
+        <div class="container">
+            <div class="game-card reveal">
+                <div class="game-card-header">
+                    <div class="game-card-icon">✊</div>
+                    <div>
+                        <h2 class="game-card-title">Taş Kağıt Makas</h2>
+                        <p class="game-card-subtitle">Bilgisayara karşı oyna!</p>
+                    </div>
+                    <div class="game-score" id="rpsScore">0 - 0</div>
+                </div>
+                <div class="game-area" style="padding:32px;text-align:center;">
+                    <div class="rps-display">
+                        <div class="rps-player">
+                            <div class="rps-emoji" id="rpsPlayerChoice">❓</div>
+                            <div class="rps-label">Sen</div>
+                        </div>
+                        <div class="rps-vs">VS</div>
+                        <div class="rps-player">
+                            <div class="rps-emoji" id="rpsComputerChoice">❓</div>
+                            <div class="rps-label">Bilgisayar</div>
+                        </div>
+                    </div>
+                    <div class="rps-result" id="rpsResult">Bir seçim yap!</div>
+                    <div class="rps-buttons">
+                        <button class="rps-btn" onclick="playRPS('taş')">🪨<span>Taş</span></button>
+                        <button class="rps-btn" onclick="playRPS('kağıt')">📄<span>Kağıt</span></button>
+                        <button class="rps-btn" onclick="playRPS('makas')">✂️<span>Makas</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="nav-logo">
+                        <div class="logo-icon">S</div><span>Selim Hancıl</span>
+                    </div>
+                    <p class="footer-brand-desc">AI & Automation Developer | Founder @ ARTplus Global Yazılım Ajansı
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h4 class="footer-links-title">Hızlı Linkler</h4>
+                    <div class="footer-links-grid">
+                        <ul class="footer-links-list">
+                            <li><a href="index.html">Ana Sayfa</a></li>
+                            <li><a href="community.html">Topluluk</a></li>
+                            <li><a href="projects.html">Projeler</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                        </ul>
+                        <ul class="footer-links-list">
+                            <li><a href="about.html">Hakkımda</a></li>
+                            <li><a href="contact.html">İletişim</a></li>
+                            <li><a href="fun.html">🎮 Eğlence</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-contact-title">İletişim</h4>
+                    <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect width="20" height="16" x="2" y="4" rx="2" />
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                        </svg><a href="mailto:selimhancil@gmail.com">selimhancil@gmail.com</a></div>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2026 Selim Hancıl. Tüm hakları saklıdır.</div>
+        </div>
+    </footer>
+
+    <button class="scroll-top-btn" id="scrollTopBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5">
+            <path d="m18 15-6-6-6 6" />
+        </svg></button>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="games.js"></script>
+    <script src="car-racing.js"></script>
+    <script src="features.js"></script>
+</body>
+
+</html>

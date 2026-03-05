@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap | Selim Hancıl</title>
+    <meta name="description" content="Hesabınıza giriş yapın veya yeni hesap oluşturun.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .auth-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 48px 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .auth-logo-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: var(--gradient-blue);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .auth-logo h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .auth-logo p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Tabs */
+        .auth-tabs {
+            display: flex;
+            background: rgba(3, 7, 18, 0.5);
+            border-radius: var(--radius-md);
+            padding: 4px;
+            margin-bottom: 28px;
+            border: 1px solid var(--border-color);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-radius: calc(var(--radius-md) - 2px);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: none;
+            background: transparent;
+        }
+
+        .auth-tab.active {
+            background: rgba(59, 130, 246, 0.12);
+            color: var(--accent-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .auth-tab:hover:not(.active) {
+            color: var(--text-secondary);
+        }
+
+        /* Forms */
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            animation: authFadeIn 0.3s ease;
+        }
+
+        @keyframes authFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-field {
+            margin-bottom: 20px;
+        }
+
+        .auth-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .auth-input-wrap {
+            position: relative;
+        }
+
+        .auth-input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1rem;
+            pointer-events: none;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 14px 14px 14px 44px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all var(--transition-fast);
+        }
+
+        .auth-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .auth-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .auth-password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+        }
+
+        .auth-password-toggle:hover {
+            color: var(--text-primary);
+        }
+
+        .auth-checkbox-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .auth-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .auth-checkbox-label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent-blue);
+            cursor: pointer;
+        }
+
+        .auth-forgot {
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .auth-forgot:hover {
+            color: var(--accent-purple);
+        }
+
+        .auth-submit {
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            background: var(--gradient-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .auth-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+        }
+
+        .auth-submit:active {
+            transform: translateY(0);
+        }
+
+        .auth-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auth-submit .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            display: none;
+        }
+
+        .auth-submit.loading .spinner {
+            display: block;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Divider */
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .auth-divider span {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Social Login */
+        .auth-social-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .auth-social-btn {
+            width: 100%;
+            padding: 13px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .auth-social-btn:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .auth-social-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .auth-social-btn.google-btn:hover {
+            border-color: rgba(234, 67, 53, 0.4);
+            background: rgba(234, 67, 53, 0.06);
+        }
+
+        .auth-social-btn.github-btn:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Terms */
+        .auth-terms {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .auth-terms a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        /* Error/Success Messages */
+        .auth-message {
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .auth-message.visible {
+            display: flex;
+        }
+
+        .auth-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .auth-message.success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            color: var(--accent-green);
+        }
+
+        .auth-demo-hint {
+            margin-top: 16px;
+            padding: 12px 14px;
+            background: rgba(59, 130, 246, 0.06);
+            border: 1px dashed rgba(59, 130, 246, 0.25);
+            border-radius: var(--radius-sm);
+            text-align: center;
+        }
+
+        .auth-demo-hint small {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .auth-demo-btn {
+            display: block;
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: var(--radius-sm);
+            color: var(--accent-blue);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .auth-demo-btn:hover {
+            background: rgba(59, 130, 246, 0.25);
+        }
+
+        /* Back to site link */
+        .auth-back {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .auth-back a {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .auth-back a:hover {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 520px) {
+            .auth-card {
+                padding: 32px 24px;
+            }
+
+            .auth-logo h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+    </div>
+    <div class="dot-grid"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">S</div><span>Selim Hancıl</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Ana Sayfa</a><a href="community.html">Topluluk</a><a
+                    href="projects.html">Projeler</a><a href="blog.html">Blog</a><a href="about.html">Hakkımda</a><a
+                    href="contact.html">İletişim</a><a href="fun.html">🎮
+                    Eğlence</a>
+            </div>
+            <div class="nav-actions">
+                <a href="https://github.com/selimhancil" target="_blank" rel="noopener noreferrer" class="nav-social-link" title="GitHub"><svg
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg></a>
+                <a href="https://x.com/selimhancil" target="_blank" rel="noopener noreferrer" class="nav-social-link" title="X / Twitter"><svg
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg></a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <div class="auth-page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <!-- Logo -->
+                <div class="auth-logo">
+                    <div class="auth-logo-icon">S</div>
+                    <h1 id="authTitle">Hoş Geldiniz</h1>
+                    <p id="authSubtitle">Hesabınıza giriş yapın veya yeni hesap oluşturun</p>
+                </div>
+
+                <!-- Message Area -->
+                <div class="auth-message" id="authMessage">
+                    <span id="authMessageIcon">⚠️</span>
+                    <span id="authMessageText"></span>
+                </div>
+
+                <!-- Tabs -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchTab('login')" id="tabLogin">Giriş Yap</button>
+                    <button class="auth-tab" onclick="switchTab('register')" id="tabRegister">Kayıt Ol</button>
+                </div>
+
+                <!-- LOGIN FORM -->
+                <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="auth-field">
+                        <label class="auth-label">E-posta</label>
+                        <div class="auth-input-wrap">
+                            <span class="auth-input-icon">📧</span>
+                            <input type="email" class="auth-input" id="loginEmail" placeholder="ornek@gmail.com"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="auth-field">
+                        <label class="auth-label">Şifre</label>
+                        <div class="auth-input-wrap">
+                            <span class="auth-input-icon">🔒</span>
+                            <input type="password" class="auth-input" id="loginPassword" placeholder="••••••••" required
+                                minlength="6">
+                            <button type="button" class="auth-password-toggle"
+                                onclick="togglePassword('loginPassword', this)">👁️</button>
+                        </div>
+                    </div>
+
+                    <div class="auth-checkbox-row">
+                        <label class="auth-checkbox-label">
+                            <input type="checkbox" id="rememberMe"> Beni hatırla
+                        </label>
+                        <a href="#" class="auth-forgot" onclick="showForgotPassword()">Şifremi unuttum</a>
+                    </div>
+
+                    <button type="submit" class="auth-submit" id="loginSubmit">
+                        <span class="spinner"></span>
+                        Giriş Yap
+                    </button>
+
+                    <div class="auth-demo-hint">
+                        <small>Demo giriş:</small>
+                        <button type="button" class="auth-demo-btn" onclick="document.getElementById('loginEmail').value='admin@demo.com';document.getElementById('loginPassword').value='admin123';document.getElementById('authMessage').classList.remove('visible');">
+                            admin@demo.com / admin123 ile doldur
+                        </button>
+                    </div>
+                </form>
+
+                <!-- REGISTER FORM -->
+                <form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+                    <div class="auth-field">
+                        <label class="auth-label">Adınız</label>
+                        <div class="auth-input-wrap">
+                            <span class="auth-input-icon">👤</span>
+                            <input type="text" class="auth-input" id="registerName" placeholder="Adınız Soyadınız"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="auth-field">
+                        <label class="auth-label">E-posta</label>
+                        <div class="auth-input-wrap">
+                            <span class="auth-input-icon">📧</span>
+                            <input type="email" class="auth-input" id="registerEmail" placeholder="ornek@gmail.com"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="auth-field">
+                        <label class="auth-label">Şifre</label>
+                        <div class="auth-input-wrap">
+                            <span class="auth-input-icon">🔒</span>
+                            <input type="password" class="auth-input" id="registerPassword"
+                                placeholder="En az 6 karakter" required minlength="6">
+                            <button type="button" class="auth-password-toggle"
+                                onclick="togglePassword('registerPassword', this)">👁️</button>
+                        </div>
+                    </div>
+
+                    <div class="auth-field">
+                        <label class="auth-label">Şifre Tekrar</label>
+                        <div class="auth-input-wrap">
+                            <span class="auth-input-icon">🔒</span>
+                            <input type="password" class="auth-input" id="registerPasswordConfirm"
+                                placeholder="Şifrenizi tekrar girin" required minlength="6">
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:20px;">
+                        <label class="auth-checkbox-label">
+                            <input type="checkbox" id="acceptTerms" required>
+                            <span>Yeniliklerden e-posta ile haberdar edilmek istiyorum</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="auth-submit" id="registerSubmit">
+                        <span class="spinner"></span>
+                        Hesap Oluştur
+                    </button>
+                </form>
+
+                <!-- Social Divider -->
+                <div class="auth-divider">
+                    <span>veya</span>
+                </div>
+
+                <!-- Social Login -->
+                <div class="auth-social-btns">
+                    <button class="auth-social-btn google-btn" onclick="loginWithGoogle()">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+                                fill="#4285F4" />
+                            <path
+                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                fill="#34A853" />
+                            <path
+                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                                fill="#FBBC05" />
+                            <path
+                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                fill="#EA4335" />
+                        </svg>
+                        Google ile devam et
+                    </button>
+                    <button class="auth-social-btn github-btn" onclick="loginWithGitHub()">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        GitHub ile devam et
+                    </button>
+                </div>
+
+                <div class="auth-terms">
+                    Devam ederek <a href="#">Kullanım Şartları</a> ve <a href="#">Gizlilik Politikası</a>'nı kabul etmiş
+                    olursunuz.
+                </div>
+            </div>
+
+            <div class="auth-back">
+                <a href="index.html">← Ana sayfaya dön</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="features.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilim | Selim Hancıl</title>
+    <meta name="description" content="Profil bilgilerinizi yönetin ve sosyal medya hesaplarınızı bağlayın.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👤</text></svg>">
+    <style>
+        .profile-page {
+            padding: 120px 0 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-avatar-wrap {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--border-color);
+            object-fit: cover;
+            background: rgba(59, 130, 246, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-muted);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-avatar-edit {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            border: 2px solid var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .profile-avatar-edit:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-name {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .profile-email {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
+        }
+
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 10px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            color: var(--accent-green);
+        }
+
+        /* Profile Grid */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .profile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            transition: all var(--transition-fast);
+        }
+
+        .profile-card:hover {
+            border-color: rgba(148, 163, 184, 0.15);
+        }
+
+        .profile-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .profile-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-card-title-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Profile Form Fields */
+        .pf-field {
+            margin-bottom: 20px;
+        }
+
+        .pf-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pf-input {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            outline: none;
+            transition: all var(--transition-fast);
+        }
+
+        .pf-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .pf-textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+
+        /* Social Links Section */
+        .social-link-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            background: rgba(3, 7, 18, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            transition: all var(--transition-fast);
+        }
+
+        .social-link-item:hover {
+            border-color: rgba(148, 163, 184, 0.15);
+        }
+
+        .social-link-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .social-link-icon.github {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .social-link-icon.twitter {
+            background: rgba(29, 155, 240, 0.1);
+        }
+
+        .social-link-icon.linkedin {
+            background: rgba(10, 102, 194, 0.1);
+        }
+
+        .social-link-icon.instagram {
+            background: rgba(225, 48, 108, 0.1);
+        }
+
+        .social-link-icon.website {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .social-link-icon.youtube {
+            background: rgba(255, 0, 0, 0.08);
+        }
+
+        .social-link-info {
+            flex: 1;
+        }
+
+        .social-link-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .social-link-url {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        .social-link-input {
+            flex: 1;
+            padding: 8px 12px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            outline: none;
+            font-family: var(--font-mono);
+        }
+
+        .social-link-input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .social-link-status {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .social-link-status.connected {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--accent-green);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .social-link-status.disconnected {
+            background: rgba(148, 163, 184, 0.08);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Notification Preferences */
+        .notif-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+        }
+
+        .notif-item:last-child {
+            border-bottom: none;
+        }
+
+        .notif-info h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .notif-info p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: rgba(148, 163, 184, 0.15);
+            border-radius: 26px;
+            transition: 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .toggle-switch input:checked+.toggle-slider {
+            background: rgba(59, 130, 246, 0.4);
+            border-color: var(--accent-blue);
+        }
+
+        .toggle-switch input:checked+.toggle-slider::before {
+            transform: translateX(22px);
+        }
+
+        /* Action Buttons */
+        .profile-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .profile-actions .btn {
+            flex: 1;
+        }
+
+        /* Danger Zone */
+        .danger-zone {
+            border-color: rgba(239, 68, 68, 0.15) !important;
+        }
+
+        .danger-zone .profile-card-title {
+            color: #ef4444;
+        }
+
+        .danger-btn {
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.08);
+            color: #ef4444;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .danger-btn:hover {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.5);
+        }
+
+        /* Login required overlay */
+        .login-required {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .login-required-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+
+        .login-required h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .login-required p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* Success Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+        }
+
+        .toast.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+    </div>
+    <div class="dot-grid"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">S</div><span>Selim Hancıl</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Ana Sayfa</a><a href="community.html">Topluluk</a><a
+                    href="projects.html">Projeler</a><a href="blog.html">Blog</a><a href="about.html">Hakkımda</a><a
+                    href="contact.html">İletişim</a><a href="fun.html">🎮
+                    Eğlence</a>
+            </div>
+            <div class="nav-actions">
+                <a href="https://github.com/selimhancil" target="_blank" rel="noopener noreferrer" class="nav-social-link" title="GitHub"><svg
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg></a>
+                <a href="https://x.com/selimhancil" target="_blank" rel="noopener noreferrer" class="nav-social-link" title="X / Twitter"><svg
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg></a>
+                <!-- Auth Button (dynamic) -->
+                <a href="auth.html" class="btn btn-primary" id="navAuthBtn"
+                    style="padding:8px 20px;font-size:0.82rem;">Giriş Yap</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <!-- LOGIN REQUIRED (shown when not logged in) -->
+    <div class="profile-page" id="loginRequiredView" style="display:none;">
+        <div class="container">
+            <div class="profile-card full-width" style="max-width:500px;margin:0 auto;">
+                <div class="login-required">
+                    <div class="login-required-icon">🔒</div>
+                    <h2>Giriş Yapmanız Gerekiyor</h2>
+                    <p>Profilinizi görüntülemek ve düzenlemek için lütfen giriş yapın.</p>
+                    <a href="auth.html" class="btn btn-primary">Giriş Yap / Kayıt Ol</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROFILE PAGE (shown when logged in) -->
+    <div class="profile-page" id="profileView" style="display:none;">
+        <div class="container">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-avatar-wrap">
+                    <div class="profile-avatar" id="profileAvatar">👤</div>
+                    <label class="profile-avatar-edit" for="avatarUpload" title="Fotoğraf değiştir">📷</label>
+                    <input type="file" id="avatarUpload" accept="image/*" style="display:none;"
+                        onchange="handleAvatarUpload(event)">
+                </div>
+                <div class="profile-name" id="profileDisplayName">Kullanıcı Adı</div>
+                <div class="profile-email" id="profileDisplayEmail">email@example.com</div>
+                <div class="profile-badge">✅ Doğrulanmış Üye</div>
+                <a href="admin.html" class="btn btn-primary" style="margin-top:16px;">⚙️ Admin Panel – Site İçeriğini Düzenle</a>
+            </div>
+
+            <!-- Profile Grid -->
+            <div class="profile-grid">
+                <!-- Personal Info -->
+                <div class="profile-card">
+                    <div class="profile-card-title">
+                        <span class="profile-card-title-icon">👤</span> Kişisel Bilgiler
+                    </div>
+                    <form id="personalInfoForm" onsubmit="savePersonalInfo(event)">
+                        <div class="pf-field">
+                            <label class="pf-label">Ad Soyad</label>
+                            <input type="text" class="pf-input" id="pfName" placeholder="Adınız Soyadınız">
+                        </div>
+                        <div class="pf-field">
+                            <label class="pf-label">Kullanıcı Adı</label>
+                            <input type="text" class="pf-input" id="pfUsername" placeholder="@kullanici">
+                        </div>
+                        <div class="pf-field">
+                            <label class="pf-label">Bio</label>
+                            <textarea class="pf-input pf-textarea" id="pfBio"
+                                placeholder="Kendinizi kısaca tanıtın..."></textarea>
+                        </div>
+                        <div class="pf-field">
+                            <label class="pf-label">Konum</label>
+                            <input type="text" class="pf-input" id="pfLocation" placeholder="İstanbul, Türkiye">
+                        </div>
+                        <div class="profile-actions">
+                            <button type="submit" class="btn btn-primary">💾 Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Account Settings -->
+                <div class="profile-card">
+                    <div class="profile-card-title">
+                        <span class="profile-card-title-icon">⚙️</span> Hesap Ayarları
+                    </div>
+                    <form id="accountForm" onsubmit="saveAccountSettings(event)">
+                        <div class="pf-field">
+                            <label class="pf-label">E-posta</label>
+                            <input type="email" class="pf-input" id="pfEmail" placeholder="email@example.com" disabled>
+                        </div>
+                        <div class="pf-field">
+                            <label class="pf-label">Telefon</label>
+                            <input type="tel" class="pf-input" id="pfPhone" placeholder="+90 5xx xxx xx xx">
+                        </div>
+                        <div class="pf-field">
+                            <label class="pf-label">Web Sitesi</label>
+                            <input type="url" class="pf-input" id="pfWebsite" placeholder="https://example.com">
+                        </div>
+                        <div class="pf-field">
+                            <label class="pf-label">Meslek</label>
+                            <input type="text" class="pf-input" id="pfJob" placeholder="Yazılım Geliştirici">
+                        </div>
+                        <div class="profile-actions">
+                            <button type="submit" class="btn btn-primary">💾 Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="profile-card full-width">
+                    <div class="profile-card-title">
+                        <span class="profile-card-title-icon">🔗</span> Sosyal Medya Hesapları
+                    </div>
+
+                    <div class="social-link-item">
+                        <div class="social-link-icon github">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </div>
+                        <div class="social-link-info">
+                            <div class="social-link-name">GitHub</div>
+                        </div>
+                        <input type="text" class="social-link-input" id="socialGithub"
+                            placeholder="github.com/kullanici">
+                        <span class="social-link-status disconnected" id="statusGithub">Bağlanmadı</span>
+                    </div>
+
+                    <div class="social-link-item">
+                        <div class="social-link-icon twitter">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </div>
+                        <div class="social-link-info">
+                            <div class="social-link-name">X / Twitter</div>
+                        </div>
+                        <input type="text" class="social-link-input" id="socialTwitter" placeholder="x.com/kullanici">
+                        <span class="social-link-status disconnected" id="statusTwitter">Bağlanmadı</span>
+                    </div>
+
+                    <div class="social-link-item">
+                        <div class="social-link-icon linkedin">🔵</div>
+                        <div class="social-link-info">
+                            <div class="social-link-name">LinkedIn</div>
+                        </div>
+                        <input type="text" class="social-link-input" id="socialLinkedin"
+                            placeholder="linkedin.com/in/kullanici">
+                        <span class="social-link-status disconnected" id="statusLinkedin">Bağlanmadı</span>
+                    </div>
+
+                    <div class="social-link-item">
+                        <div class="social-link-icon instagram">📸</div>
+                        <div class="social-link-info">
+                            <div class="social-link-name">Instagram</div>
+                        </div>
+                        <input type="text" class="social-link-input" id="socialInstagram"
+                            placeholder="instagram.com/kullanici">
+                        <span class="social-link-status disconnected" id="statusInstagram">Bağlanmadı</span>
+                    </div>
+
+                    <div class="social-link-item">
+                        <div class="social-link-icon youtube">▶️</div>
+                        <div class="social-link-info">
+                            <div class="social-link-name">YouTube</div>
+                        </div>
+                        <input type="text" class="social-link-input" id="socialYoutube"
+                            placeholder="youtube.com/@kullanici">
+                        <span class="social-link-status disconnected" id="statusYoutube">Bağlanmadı</span>
+                    </div>
+
+                    <div class="profile-actions">
+                        <button class="btn btn-primary" onclick="saveSocialLinks()">🔗 Sosyal Hesapları Kaydet</button>
+                    </div>
+                </div>
+
+                <!-- Email Notifications -->
+                <div class="profile-card">
+                    <div class="profile-card-title">
+                        <span class="profile-card-title-icon">🔔</span> Bildirim Tercihleri
+                    </div>
+
+                    <div class="notif-item">
+                        <div class="notif-info">
+                            <h4>Yeni Projeler</h4>
+                            <p>Yeni proje eklendiğinde bildirim al</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="notifProjects" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="notif-item">
+                        <div class="notif-info">
+                            <h4>Blog Yazıları</h4>
+                            <p>Yeni blog yazısı yayınlandığında bildirim al</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="notifBlog" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="notif-item">
+                        <div class="notif-info">
+                            <h4>Haber Bülteni</h4>
+                            <p>Haftalık özet e-postası al</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="notifNewsletter">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="notif-item">
+                        <div class="notif-info">
+                            <h4>Güvenlik Uyarıları</h4>
+                            <p>Hesap güvenliği ile ilgili bildirimleri al</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="notifSecurity" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="profile-actions">
+                        <button class="btn btn-secondary" onclick="saveNotifications()">💾 Tercihleri Kaydet</button>
+                    </div>
+                </div>
+
+                <!-- Danger Zone -->
+                <div class="profile-card danger-zone">
+                    <div class="profile-card-title">
+                        <span class="profile-card-title-icon">⚠️</span> Tehlikeli Alan
+                    </div>
+                    <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:16px;">Bu işlemler geri alınamaz.
+                        Dikkatli olun.</p>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                        <button class="danger-btn" onclick="resetProfile()">Profili Sıfırla</button>
+                        <button class="danger-btn" onclick="deleteAccount()">Hesabı Sil</button>
+                        <button class="danger-btn" onclick="logoutUser()">🚪 Çıkış Yap</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">✅</span>
+        <span id="toastText">Değişiklikler kaydedildi!</span>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="nav-logo">
+                        <div class="logo-icon">S</div><span>Selim Hancıl</span>
+                    </div>
+                    <p class="footer-brand-desc">AI & Automation Developer | Founder @ ARTplus Global Yazılım Ajansı</p>
+                </div>
+                <div class="footer-links">
+                    <h4 class="footer-links-title">Hızlı Linkler</h4>
+                    <div class="footer-links-grid">
+                        <ul class="footer-links-list">
+                            <li><a href="index.html">Ana Sayfa</a></li>
+                            <li><a href="projects.html">Projeler</a></li>
+                            <li><a href="fun.html">🎮 Eğlence</a></li>
+                        </ul>
+                        <ul class="footer-links-list">
+                            <li><a href="about.html">Hakkımda</a></li>
+                            <li><a href="contact.html">İletişim</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-contact-title">İletişim</h4>
+                    <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect width="20" height="16" x="2" y="4" rx="2" />
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                        </svg><a href="mailto:selimhancil@gmail.com">selimhancil@gmail.com</a></div>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2026 Selim Hancıl. Tüm hakları saklıdır.</div>
+        </div>
+    </footer>
+
+    <button class="scroll-top-btn" id="scrollTopBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5">
+            <path d="m18 15-6-6-6 6" />
+        </svg></button>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="features.js"></script>
+</body>
+
+</html>

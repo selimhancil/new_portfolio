@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topluluk & Kaynaklar | Selim Hancıl</title>
+    <meta name="description" content="Ücretsiz kaynaklar, rehberler, uzmanlık alanları ve soru-cevap topluluğu.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+
+<body>
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+    </div>
+    <div class="dot-grid"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">S</div><span>Selim Hancıl</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="community.html" class="active">Topluluk</a>
+                <a href="projects.html">Projeler</a>
+                <a href="blog.html">Blog</a>
+                <a href="about.html">Hakkımda</a>
+                <a href="contact.html">İletişim</a>
+                <a href="fun.html">🎮 Eğlence</a>
+            </div>
+            <div class="nav-actions">
+                <a href="https://github.com/selimhancil" target="_blank" rel="noopener noreferrer" class="nav-social-link" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                <a href="https://x.com/selimhancil" target="_blank" rel="noopener noreferrer" class="nav-social-link" title="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                <a href="https://instagram.com/selimhancil" target="_blank" class="nav-social-link nav-instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+            </div>
+            <a href="auth.html" class="btn btn-primary" id="navAuthBtn" style="padding:8px 20px;font-size:0.82rem;">Giriş Yap</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-badge">~/community</div>
+            <h1>Topluluk & <span class="gradient-text">Kaynaklar</span></h1>
+            <p>Tamamen ücretsiz bilgi paylaşımı. Kaynaklar, rehberler ve soru-cevap topluluğu.</p>
+        </div>
+    </section>
+
+    <!-- TOPLULUK CTA - WhatsApp & Telegram -->
+    <section class="section" style="padding-top: 40px;">
+        <div class="container">
+            <div class="community-cta reveal">
+                <h2 class="community-cta-title">💬 Topluluğumuza Katıl</h2>
+                <p class="community-cta-desc">Yazılım, proje ve kariyer sohbetleri için WhatsApp ve Telegram topluluklarımıza katıl. Soru sor, bilgi paylaş, birlikte öğren!</p>
+                <div class="community-buttons">
+                    <a href="https://chat.whatsapp.com/GRUP_LINKI" target="_blank" rel="noopener noreferrer" class="community-btn community-btn-wa">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        WhatsApp Topluluğuna Katıl
+                    </a>
+                    <a href="https://t.me/selimhancil" target="_blank" rel="noopener noreferrer" class="community-btn community-btn-tg">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                        Telegram Topluluğuna Katıl
+                    </a>
+                </div>
+                <p class="community-cta-note">💯 Ücretsiz • 🌍 Herkese açık • 🤝 Destekleyici ortam</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÖNERİ VİDEOLARIM -->
+    <hr class="section-divider">
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">▶️ Öneri Videolarım</h2>
+            <p class="section-desc reveal">YouTube ve Instagram'da paylaştığım öneri ve eğitim videoları. Takip etmeyi unutma!</p>
+            <div class="videos-grid reveal">
+                <!-- YouTube - video ID'yi değiştir: youtube.com/watch?v=VIDEO_ID -->
+                <div class="video-card video-card-youtube reveal reveal-delay-1">
+                    <a href="https://www.youtube.com/watch?v=VIDEO_ID" target="_blank" rel="noopener noreferrer" class="video-card-link">
+                        <div class="video-card-thumb">
+                            <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Öneri videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <span class="video-card-platform video-platform-yt">YouTube</span>
+                        </div>
+                        <h3 class="video-card-title">Video Başlığı 1</h3>
+                        <p class="video-card-desc">Kısa açıklama</p>
+                    </a>
+                </div>
+                <!-- YouTube - 2. video -->
+                <div class="video-card video-card-youtube reveal reveal-delay-2">
+                    <a href="https://www.youtube.com/watch?v=VIDEO_ID_2" target="_blank" rel="noopener noreferrer" class="video-card-link">
+                        <div class="video-card-thumb">
+                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" title="Öneri videosu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <span class="video-card-platform video-platform-yt">YouTube</span>
+                        </div>
+                        <h3 class="video-card-title">Video Başlığı 2</h3>
+                        <p class="video-card-desc">Kısa açıklama</p>
+                    </a>
+                </div>
+                <!-- Instagram Reel - reel ID'yi değiştir -->
+                <a href="https://www.instagram.com/reel/REEL_ID/" target="_blank" rel="noopener noreferrer" class="video-card video-card-instagram reveal reveal-delay-3">
+                    <div class="video-card-thumb video-thumb-instagram">
+                        <span class="video-play-icon">▶</span>
+                        <span class="video-card-platform video-platform-ig">Instagram</span>
+                    </div>
+                    <h3 class="video-card-title">Reel / Video Başlığı</h3>
+                    <p class="video-card-desc">Instagram'da izle</p>
+                </a>
+            </div>
+            <div class="videos-cta reveal">
+                <a href="https://youtube.com/@selimhancil" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="margin-right:12px;">YouTube Kanalım</a>
+                <a href="https://instagram.com/selimhancil" target="_blank" rel="noopener noreferrer" class="btn btn-instagram">Instagram Profilim</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- KAYNAKLAR -->
+    <hr class="section-divider">
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">📚 Kaynaklar</h2>
+            <p class="section-desc reveal">Öğrenmeye başlamak için ücretsiz kaynaklar ve araçlar.</p>
+            <div class="community-grid">
+                <a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer" class="community-card reveal reveal-delay-1">
+                    <span class="community-card-icon">🌐</span>
+                    <h3>MDN Web Docs</h3>
+                    <p>Web teknolojileri için en iyi referans</p>
+                </a>
+                <a href="https://freecodecamp.org" target="_blank" rel="noopener noreferrer" class="community-card reveal reveal-delay-2">
+                    <span class="community-card-icon">🎓</span>
+                    <h3>freeCodeCamp</h3>
+                    <p>Ücretsiz kodlama eğitimleri</p>
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="community-card reveal reveal-delay-3">
+                    <span class="community-card-icon">⌨️</span>
+                    <h3>GitHub</h3>
+                    <p>Açık kaynak projeler ve işbirliği</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÜCRETSIZ İÇERİK -->
+    <hr class="section-divider">
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">💡 Ücretsiz İçerik</h2>
+            <p class="section-desc reveal">Blog yazıları, paylaşımlar ve eğitim içerikleri.</p>
+            <div class="community-grid">
+                <a href="blog.html" class="community-card reveal reveal-delay-1">
+                    <span class="community-card-icon">📝</span>
+                    <h3>Blog</h3>
+                    <p>Yazılım ve teknoloji yazıları</p>
+                </a>
+                <a href="https://x.com/selimhancil" target="_blank" rel="noopener noreferrer" class="community-card reveal reveal-delay-2">
+                    <span class="community-card-icon">𝕏</span>
+                    <h3>X / Twitter</h3>
+                    <p>Günlük paylaşımlar ve ipuçları</p>
+                </a>
+                <a href="https://instagram.com/selimhancil" target="_blank" rel="noopener noreferrer" class="community-card reveal reveal-delay-3">
+                    <span class="community-card-icon">📸</span>
+                    <h3>Instagram</h3>
+                    <p>Görsel içerik ve günlük</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- UZMANLIK ALANLARI -->
+    <hr class="section-divider">
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">🎯 Uzmanlık Alanları</h2>
+            <p class="section-desc reveal">Bu konularda sorularına cevap verebilirim.</p>
+            <div class="expertise-tags reveal">
+                <span class="expertise-tag">React / Next.js</span>
+                <span class="expertise-tag">Flutter / Mobil</span>
+                <span class="expertise-tag">Python / Django</span>
+                <span class="expertise-tag">AI / Yapay Zeka</span>
+                <span class="expertise-tag">Node.js / Backend</span>
+                <span class="expertise-tag">TypeScript</span>
+                <span class="expertise-tag">Git / GitHub</span>
+                <span class="expertise-tag">Firebase</span>
+                <span class="expertise-tag">Kariyer Danışmanlığı</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- REHBERLER -->
+    <hr class="section-divider">
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">📖 Rehberler</h2>
+            <p class="section-desc reveal">Başlangıç rehberleri ve adım adım anlatımlar.</p>
+            <div class="community-grid">
+                <a href="blog.html" class="community-card reveal reveal-delay-1">
+                    <span class="community-card-icon">🚀</span>
+                    <h3>Web Geliştirmeye Başlangıç</h3>
+                    <p>HTML, CSS, JavaScript ile ilk adımlar</p>
+                </a>
+                <a href="blog.html" class="community-card reveal reveal-delay-2">
+                    <span class="community-card-icon">⚛️</span>
+                    <h3>React vs Vue Karşılaştırması</h3>
+                    <p>2026 frontend framework rehberi</p>
+                </a>
+                <a href="blog.html" class="community-card reveal reveal-delay-3">
+                    <span class="community-card-icon">🤖</span>
+                    <h3>AI ile Yazılım Geliştirme</h3>
+                    <p>Geleceğin kodlama deneyimi</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <hr class="section-divider">
+    <section class="cta-section reveal">
+        <div class="container">
+            <h2 class="cta-title">Topluluğumuza katıl!<br><span class="gradient-text">WhatsApp & Telegram gruplarında seni bekliyoruz.</span></h2>
+            <div class="cta-buttons">
+                <a href="https://chat.whatsapp.com/GRUP_LINKI" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background:#25D366;color:#fff;">WhatsApp Grubuna Katıl</a>
+                <a href="https://t.me/selimhancil" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Telegram Grubuna Katıl</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="nav-logo"><div class="logo-icon">S</div><span>Selim Hancıl</span></div>
+                    <p class="footer-brand-desc">AI & Automation Developer | Ücretsiz bilgi paylaşımı</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/selimhancil" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                        <a href="https://x.com/selimhancil" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                        <a href="https://instagram.com/selimhancil" target="_blank" class="footer-social-instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4 class="footer-links-title">Hızlı Linkler</h4>
+                    <div class="footer-links-grid">
+                        <ul class="footer-links-list">
+                            <li><a href="index.html">Ana Sayfa</a></li>
+                            <li><a href="community.html">Topluluk</a></li>
+                            <li><a href="projects.html">Projeler</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                        </ul>
+                        <ul class="footer-links-list">
+                            <li><a href="about.html">Hakkımda</a></li>
+                            <li><a href="contact.html">İletişim</a></li>
+                            <li><a href="fun.html">🎮 Eğlence</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-contact-title">İletişim</h4>
+                    <div class="footer-contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><a href="mailto:selimhancil@gmail.com">selimhancil@gmail.com</a></div>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2026 Selim Hancıl. Tüm hakları saklıdır.</div>
+        </div>
+    </footer>
+
+    <button class="scroll-top-btn" id="scrollTopBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg></button>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="content-loader.js"></script>
+    <script src="features.js"></script>
+</body>
+
+</html>
