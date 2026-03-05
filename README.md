@@ -53,6 +53,15 @@ Modern, responsive ve güvenli bir kişisel portfolio sitesi. Terminal animasyon
 ![Topluluk Sayfası] <img width="1680" height="780" alt="Ekran Resmi 2026-03-05 18 28 28" src="https://github.com/user-attachments/assets/16422454-578b-4f2f-8349-acc5c9263ac9" />
 
 
+### Oyun Bölümü
+![Eğlence] <img width="1680" height="780" alt="Ekran Resmi 2026-03-05 18 31 00" src="https://github.com/user-attachments/assets/56f83fbf-69b5-4b44-ab81-d3fe3c083844" />
+
+
+### Klavye Hız Testi 
+![Klavye Hız Testi] <img width="1680" height="780" alt="Ekran Resmi 2026-03-05 18 31 39" src="https://github.com/user-attachments/assets/833c7a9b-e09d-4975-ba40-460a74764567" />
+
+
+
 ---
 
 ## 🚀 Kurulum
