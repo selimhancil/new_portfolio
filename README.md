@@ -1,4 +1,4 @@
-<img width="1680" height="747" alt="Ekran Resmi 2026-03-05 18 26 09" src="https://github.com/user-attachments/assets/6d16f9ac-931f-4674-b3c1-b81804c93d4f" /># 🚀 Selim Han ÇİL — Kişisel Portfolio Sitesi
+🚀 Selim Han ÇİL — Kişisel Portfolio Sitesi
 
 Modern, responsive ve güvenli bir kişisel portfolio sitesi. Terminal animasyonu, admin paneli, Firebase entegrasyonu ve mini oyunlar içerir.
 
