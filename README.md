@@ -1,10 +1,12 @@
-# 🚀 Selim Hancıl — Kişisel Portfolio Sitesi
+<img width="1680" height="747" alt="Ekran Resmi 2026-03-05 18 26 09" src="https://github.com/user-attachments/assets/6d16f9ac-931f-4674-b3c1-b81804c93d4f" /># 🚀 Selim Han ÇİL — Kişisel Portfolio Sitesi
 
 Modern, responsive ve güvenli bir kişisel portfolio sitesi. Terminal animasyonu, admin paneli, Firebase entegrasyonu ve mini oyunlar içerir.
 
-![Ana Sayfa](screenshots/home.png)
+![Ana Sayfa](<img width="1680" height="747" alt="Ekran Resmi 2026-03-05 18 27 01" src="https://github.com/user-attachments/assets/b985c59b-5e5f-4229-a5a0-12eb69883248" />
+
 
 ---
+
 
 ## ✨ Özellikler
 
@@ -36,16 +38,20 @@ Modern, responsive ve güvenli bir kişisel portfolio sitesi. Terminal animasyon
 <!-- Görselleri eklemek için screenshots klasörü oluşturup aşağıdaki yolları kullanabilirsin -->
 
 ### Ana Sayfa
-![Ana Sayfa Hero](screenshots/home.png)
+![Ana Sayfa Hero](<img width="1680" height="747" alt="Ekran Resmi 2026-03-05 18 26 41" src="https://github.com/user-attachments/assets/97f05f00-05e6-4d05-b13a-c8d8a851fddd" />
+
 
 ### Projeler
-![Projeler Sayfası](screenshots/projects.png)
+![Projeler Sayfası]<img width="1680" height="798" alt="Ekran Resmi 2026-03-05 18 27 27" src="https://github.com/user-attachments/assets/028f2502-b21d-411a-8313-7da4c4a1e27f" />
+
 
 ### Admin Panel
-![Admin Panel](screenshots/admin.png)
+![Admin Panel] <img width="1680" height="780" alt="Ekran Resmi 2026-03-05 18 28 10" src="https://github.com/user-attachments/assets/b9062da9-8920-43e8-b519-88fb960cf00c" />
+
 
 ### Topluluk
-![Topluluk Sayfası](screenshots/community.png)
+![Topluluk Sayfası] <img width="1680" height="780" alt="Ekran Resmi 2026-03-05 18 28 28" src="https://github.com/user-attachments/assets/16422454-578b-4f2f-8349-acc5c9263ac9" />
+
 
 ---
 
